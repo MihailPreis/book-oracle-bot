@@ -3,9 +3,10 @@
 
 import logging
 import os
-import fitz
 import random
-from functools import partial
+from typing import List
+
+import fitz
 from dotenv import load_dotenv
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, CallbackContext
@@ -30,11 +31,15 @@ def get_prediction(update: Update, context: CallbackContext) -> None:
         page = None
         line = None
 
+        if context.args is not None:
+            args = context.args
+        else:
+            args = []
         try:
-            page = int(context.args[0])
-            line = int(context.args[1])
+            page = int(args[0])
+            line = int(args[1])
         except Exception:
-            if len(context.args) > 0:
+            if len(args) > 0:
                 _send(update, 'Usage: /predict or /predict <page> <line>')
             else:
                 try:
@@ -65,7 +70,7 @@ def _get(page: int, row: int, doc: fitz.Document) -> str:
     return _clear_page(page, doc[page - 1].getText())[row - 1].strip()
 
 
-def _clear_page(ind: int, text: str) -> str:
+def _clear_page(ind: int, text: str) -> List[str]:
     return list(filter(lambda x: len(x) > 0 and x != str(ind), str(ind).join(text.split(str(ind))[1:]).split('\n')))
 
 
