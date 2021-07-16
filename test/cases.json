@@ -1,0 +1,17 @@
+[
+  {
+    "item": "123\n\n\niiikkkg\n123",
+    "expect": [
+      "iiikkkg"
+    ],
+    "ind": 123
+  },
+  {
+    "item": "123\n\n\nfsafsaf\n123\niiikkkg\n123",
+    "expect": [
+      "fsafsaf",
+      "iiikkkg"
+    ],
+    "ind": 123
+  }
+]
