@@ -22,7 +22,7 @@ def _send(update, text):
 
 
 def start(update: Update, context: CallbackContext) -> None:
-    _send(update, 'Hi! Use /predict or /predict <page> <line> for a get predict.')
+    _send(update, 'Hi\! Use /predict or /predict \<page\> \<line\> for a get predict\.')
 
 
 def get_prediction(update: Update, context: CallbackContext) -> None:
